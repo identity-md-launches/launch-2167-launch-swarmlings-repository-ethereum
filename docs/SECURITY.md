@@ -55,6 +55,10 @@
   behaviour is unchanged; the full suite runs on the new layout.
 - **Pairing.** On Ethereum mainnet the reward currency is IMD and the hook binds only a LING / IMD pool;
   `test/Manifest.t.sol` fails if `launch.json` pairs LING with anything else.
+- **`BUILD_TAG`.** A constant with no effect on behaviour. IMD's protected floor mines the hook's CREATE2 salt
+  in Solidity, and launch 1954 parked when that search (57,357 salts) ran its setUp out of memory gas. The tag
+  is picked so the search ends within a few hundred salts; `test/HookSalt.t.sol` fails if a bytecode change
+  makes it long again.
 
 - **EIP-7702 wallets.** DN404 treats any code-bearing account as a contract that skips NFTs. A delegated EOA has
   exactly 23 bytes of code starting with `0xef0100`, a prefix EIP-3541 forbids for deployed contracts, so the
